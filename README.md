@@ -13,7 +13,7 @@ make
 We use the following plaintext corpora:
 
 - [sv](https://www.dropbox.com/sh/r2hu8qo281u25n7/AABv2dpqtpnNIr7BAgPoloYja?dl=0) - Vocab size: 1163288 Words in train file: 284410463
-- [en](https://www.dropbox.com/sh/lgzu8a90a0fvkl8/AAC_JbCXuOvuJMu7FTD5nnw9a?dl=0). Vocab size: 4891175, Words in train file: 2989787812
+- [en](https://www.dropbox.com/sh/lgzu8a90a0fvkl8/AAC_JbCXuOvuJMu7FTD5nnw9a?dl=0) - Vocab size: 4891175, Words in train file: 2989787812
 
 To allow for an unknown vector first create the vocabulary, manually append it a
 unknown word and then train the model.
