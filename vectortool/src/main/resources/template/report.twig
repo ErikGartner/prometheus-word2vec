@@ -1,0 +1,100 @@
+<html>
+<head>
+    <title>Evaluation report {{timestamp}}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css" />
+    <style>
+        body {
+            font-family: "Helvetica";
+            font-size: 12pt;
+            padding: 10pt;
+            overflow-x: scroll;
+        }
+
+        .annotation {
+          border: 1px #fff solid;
+          padding: 2pt;
+          color:white;
+          background-color: #000;
+          border-radius: 4pt;
+          cursor: pointer;
+        }
+
+        .entity {
+          background-color: #2185D0;
+        }
+
+        .mention {
+          background-color: #767676;
+        }
+
+        .annotation-loc {
+          background-color: #F2711C
+        }
+
+        .annotation-org {
+          background-color: #00B5AD;
+        }
+
+        .annotation-event {
+          background-color: #A333C8;
+        }
+
+        .annotation-work {
+          background-color: #A5673F;
+        }
+
+        .annotation-entity {
+          background-color: #767676;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ui fluid container">
+    <h1 class="ui header">Analogy report</h1>
+    <h2 class="ui header">Words</h2>
+    <ul>
+    {%- for word in words -%}
+       <li><a href="#{{word}}">{{word}}</a></li>
+    {%- endfor -%}
+    </ul>
+
+    {%- for word in words -%}
+    <h3 class="ui header" id="{{word}}">{{word}}</h3>
+        <table class="ui celled structured compact table">
+            <thead>
+            <tr>
+                <th rowspan="2">Rank</th>
+                {%- for model in models -%}
+                <th colspan="2">{{model}}</th>
+                {%- endfor -%}
+            </tr>
+            <tr>
+                {%- for model in models -%}
+                <th>Word</th>
+                <th>Sim</th>
+                {%- endfor -%}
+            </tr>
+            </thead>
+            <tbody>
+            {%- for rank in ranks -%}
+            <tr>
+                <td>{{rank+1}}.</td>
+                {%- for model in models -%}
+                <td>{{data.get(word).get(model).get(rank).getWord()}}</td>
+                <td>{{data.get(word).get(model).get(rank).getSimilarity()}}</td>
+                {%- endfor -%}
+            </tr>
+            {%- endfor -%}
+            </tbody>
+        </table>
+        {%- endfor %}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"></script>
+<!--<script>
+    $('.menu .item').tab();
+</script>-->
+</body>
+</html>

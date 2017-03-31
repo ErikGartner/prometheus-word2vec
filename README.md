@@ -26,3 +26,22 @@ echo "__UNKNOWN__ 0" >> vocab.txt
 ```bash
 ./word2vec -train <input.txt> -binary 1 -output <model.bin> -size 300 -window 5 -sample 1e-4 -negative 5 -hs 0 -cbow 1 -iter 3 -read-vocab vocab.txt -threads 4
 ```
+
+## Produce Optimized Model
+Thanks to [Marcus Klang](https://github.com/marcusklang) there exists a way to create a extremly fast binary model. Much faster than the original. This model be read using memory mapping in Java in near IO speed.
+
+It however uses the text file instead of the binary file. Create the text file by running the command above using the `-binary 0` flag.
+
+```bash
+cd vectortool
+mvn package
+cd target
+java -jar vectortool-1.0-SNAPSHOT.jar convert ../../model.txt model.opt
+```
+
+Once this model is done it can be accessed using:
+```bash
+java -jar closest ../../model.opt
+```
+It is also possible to read it from your Java/Scala program, by using the same
+principle as in the [Word2vec.java](vectortool/src/main/java/se/lth/cs/nlp/Word2vec.java) class.
